@@ -48,19 +48,25 @@ export class SysTrayService implements OnApplicationShutdown {
   private hidden = this.serverConf.hidden;
 
   private remoteDisplayItem: MenuItemClickable = {
-    title: 'Remote Displays',
-    tooltip: 'Open remote displays',
-    items: [
-      {
-        title: 'Open MCDU',
-        tooltip: 'Open the MCDU remote display with your default browser, using your local IP',
-        enabled: true,
-        click: async () => {
-          open(`http://${await this.networkService.getLocalIp(true)}:${this.serverConf.port}/interfaces/mcdu`);
+        title: 'Remote Displays',
+        tooltip: 'Open remote displays',
+        items: [{
+            title: 'Open MCDU',
+            tooltip: 'Open the MCDU remote display with your default browser, using your local IP',
+            enabled: true,
+            click: async () => {
+                open(`http://${await this.networkService.getLocalIp(true)}:${this.serverConf.port}/interfaces/mcdu`);
+            },
         },
-      },
-    ],
-  };
+        {
+            title: 'Open MCDU (4:3)',
+            tooltip: 'Open the MCDU remote display with your default browser (in 4:3 mode), using your local IP',
+            enabled: true,
+            click: async () => {
+                open(`http://${await this.networkService.getLocalIp(true)}:${this.serverConf.port}/interfaces/mcdu/?43`);
+            },
+        }],
+    };
 
   private resourcesFolderItem: MenuItemClickable = {
     title: 'Open Resources Folder',
